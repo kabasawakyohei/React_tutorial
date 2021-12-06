@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
+  // コンストラクタの定義
+  constructor(props){
+    // constructor を持つ React のクラスコンポーネントでは、すべてコンストラクタを super(props) の呼び出しから始める
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
   render() {
     return (
-      <button className="square">
-        {this.props.value}
+      <button className="square"
+       onClick={() => this.setState({value: "○"})}
+      >
+        {/* Board component(親コンポーネント)からSquare componentDidCatch(子コンポーネント)へ値を受け取る */}
+        {this.state.value}
       </button>
     );
   }
@@ -14,6 +26,7 @@ class Square extends React.Component {
 
 class Board extends React.Component {
   renderSquare(i) {
+    // Board component(親コンポーネント)からSquare componentDidCatch(子コンポーネント)へ値を受け渡す
     return <Square value={i} />;
   }
 
